@@ -15,7 +15,7 @@ const game = new Game(process.env.SPACE_ID as string, () => Promise.resolve({ ap
 game.connect();
 game.subscribeToConnection((connected) => console.log("connected?", connected));
 
-const intervalId = setInterval(()=> {
+setTimeout(()=> {
 	// ユーザー名からplayerIdを取得
 	const findPlayer1 = Object.entries(game.players).find(([k,v]) => v.name === args[0])
 	const findPlayer2 = Object.entries(game.players).find(([k,v]) => v.name === args[1])
@@ -33,6 +33,4 @@ const intervalId = setInterval(()=> {
 	console.log('teleport実行')
 	game.teleport(process.env.MAP_ID as string, player2Place!.x, player2Place!.y, player1Id);
 	game.teleport(process.env.MAP_ID as string, player1Place!.x, player1Place!.y, player2Id);
-
-	clearInterval(intervalId);
 }, 2000)
