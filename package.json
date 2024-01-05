@@ -1,0 +1,18 @@
+{
+  "name": "gather-bugiugi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc -b && node dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gathertown/gather-game-client": "^43.0.1",
+    "dotenv": "^16.3.1",
+    "isomorphic-ws": "^5.0.0",
+    "typescript": "^5.3.3"
+  }
+}
