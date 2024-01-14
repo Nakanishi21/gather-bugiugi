@@ -27,10 +27,10 @@ setTimeout(()=> {
 		process.exit(1);
 	}
 
-	const player1Place = {x: game.players[player1Id].x, y: game.players[player1Id].y}
-	const player2Place = {x: game.players[player2Id].x, y: game.players[player2Id].y}
+	const player1Place = {x: findPlayer1![1].x, y: findPlayer1![1].y}
+	const player2Place = {x: findPlayer2![1].x, y: findPlayer2![1].y}
 
 	console.log('teleport実行')
-	game.teleport(process.env.MAP_ID as string, player2Place!.x, player2Place!.y, player1Id);
-	game.teleport(process.env.MAP_ID as string, player1Place!.x, player1Place!.y, player2Id);
+	game.teleport(findPlayer2![1].map as string, player2Place!.x, player2Place!.y, player1Id);
+	game.teleport(findPlayer1![1].map as string, player1Place!.x, player1Place!.y, player2Id);
 }, 2000)
