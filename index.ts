@@ -15,7 +15,10 @@ const game = new Game(process.env.SPACE_ID as string, () => Promise.resolve({ ap
 game.connect();
 game.subscribeToConnection((connected) => console.log("connected?", connected));
 
+
+
 setTimeout(()=> {
+	console.log('2秒経過')
 	// ユーザー名からplayerIdを取得
 	const findPlayer1 = Object.entries(game.players).find(([k,v]) => v.name === args[0])
 	const findPlayer2 = Object.entries(game.players).find(([k,v]) => v.name === args[1])
@@ -27,10 +30,14 @@ setTimeout(()=> {
 		process.exit(1);
 	}
 
-	const player1Place = {x: findPlayer1![1].x, y: findPlayer1![1].y}
-	const player2Place = {x: findPlayer2![1].x, y: findPlayer2![1].y}
-
-	console.log('teleport実行')
-	game.teleport(findPlayer2![1].map as string, player2Place!.x, player2Place!.y, player1Id);
-	game.teleport(findPlayer1![1].map as string, player1Place!.x, player1Place!.y, player2Id);
+	game.subscribeToEvent('playerSetsEmoteV2', (data) => {
+		const player1 = game.players[player1Id]
+		const player2 = game.players[player2Id]
+		
+		if (data.playerSetsEmoteV2.emote === '👏') {
+			console.log('teleport実行')
+			game.teleport(player2.map as string, player2.x, player2.y, player1Id);
+			game.teleport(player1.map as string, player1.x, player1.y, player2Id);
+		}
+	});	
 }, 2000)
